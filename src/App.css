@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+}
+
+.logo {
+  height: 40vmin;
+  position: fixed;
+  top: 20vmin;
+  pointer-events: none;
+  margin-bottom: 5vmin;
+}
+
+.logo.small {
+  height: 11vmin;
+  pointer-events: none;
+  position: fixed;
+  top: 5px;
+  display: block;
+  transition: all 0.75s linear;
+}
+
+.loading {
+  position: fixed;
+  height: 5vmin;
+  bottom: 30vmin;
+  margin-top: 5vmin;
+}
+
+.loading.false {
+  visibility: hidden;
+}
+
+@media (min-width: 400px) and (max-width: 1500px) {
+  .content {
+    margin-top: 15vmin;
+  }
+}
+
+.App-header {
+  /*
+  background-color: #282c34;
+   */
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative;
+}
+
+.down-button-holder {
+  bottom: 12vmin;
+  position: absolute;
+}
+

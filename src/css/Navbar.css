@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Exodus';
+    src: local('Exodus'), url(../resources/fonts/ExodusDemo-Sharpen.otf) format('opentype');
+}
+
+.navbar-holder {
+    position: fixed;
+    align-content: center;
+    width: 100%;
+    top: 0;
+}
+
+.navbar {
+    min-height: 100px;
+    height: 5vmin;
+    background-color: #bab9b6;
+    z-index: 100;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.logo-navbar{
+    height: 11vmin;
+    width: auto;
+    pointer-events: none;
+    margin-top: 0;
+    position: sticky;
+}
+
+.background-bar {
+    position: absolute;
+    transform: rotate(1deg);
+    background-color: #575757;
+    width: 100%;
+    min-height: 100px;
+    height: 5vmin;
+    z-index: -100;
+    top: 5px;
+    right: -5px;
+}
+
+p {
+    display: inline-block;
+    padding-left: 15vmin;
+    padding-right: 10vmin;
+    margin-top: 3vmin;
+
+    font-weight: bold;
+    font-size: 4vmin;
+    font-family: Exodus, serif;
+}

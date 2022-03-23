@@ -1,0 +1,55 @@
+.card-holder {
+    width: 35vmin;
+    height: 60vmin;
+    margin-left: 3vmin;
+    margin-right: 3vmin;
+    display: inline-block;
+    position: relative;
+}
+
+.card {
+    width: 35vmin;
+    height: 60vmin;
+    background-color: #bab9b6;
+    background-size: cover;
+    background-position: center;
+    border-radius: 3px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: 3s ease-out;
+    transition-timing-function: ease-out;
+}
+
+.card.back {
+    margin-left: 0;
+    margin-top: 0;
+    width: 35vmin;
+    height: 60vmin;
+    background-size: cover;
+    background-position: center;
+    border-radius: 3px;
+    transform: rotateX(720deg)
+}
+
+.background-card {
+    width: 35vmin;
+    height: 60vmin;
+    display: block;
+    position: absolute;
+    transform: rotate(-4deg);
+    margin-top: 20px;
+    margin-left: -16px;
+
+    background: #080808;
+    background: linear-gradient(to right, #545454 50%, #080808 50%) left;
+    background-size: 200%;
+    transition: .4s ease-out;
+}
+
+.background-card.hover{
+    background-position: right;
+}
+
+/*
+Add media query for different screensizes to adjust the transform and margin of the background div
+ */
