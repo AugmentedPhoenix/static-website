@@ -62,6 +62,7 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
             </div>
             <div className={`card ${isFlipped? "back" : ""}`} style={{backgroundImage: `url(${isInfoFlipped? imgLink2 : imgLink1})`}}>
                 <p>
+                    {isFlipped? inGameName2 : inGameName1}
                 </p>
             </div>
         </div>
