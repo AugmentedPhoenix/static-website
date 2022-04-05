@@ -5,11 +5,11 @@ const Navbar = ({isVisible}) => {
     return (
         <div className={`navbar-holder ${isVisible ? "" : "hidden"}`}>
             <div className="navbar">
-                <p>Home</p>
-                <p>Roster</p>
+                <p className={`navbar-text`}>Home</p>
+                <p className={`navbar-text`}>Roster</p>
                 <img src={AvarumSlogan} className="logo-navbar" alt="logo" />
-                <p>Schedule</p>
-                <p>Streams</p>
+                <p className={`navbar-text`}>Schedule</p>
+                <p className={`navbar-text`}>Streams</p>
             </div>
             <div className="background-bar">
 

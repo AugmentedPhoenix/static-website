@@ -61,9 +61,9 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
             <div className={`background-card ${hovered ? "hover" : ""}`}>
             </div>
             <div className={`card ${isFlipped? "back" : ""}`} style={{backgroundImage: `url(${isInfoFlipped? imgLink2 : imgLink1})`}}>
-                <p>
-                    {isFlipped? inGameName2 : inGameName1}
-                </p>
+                <div className={`top-overlay`}>
+                    {isInfoFlipped? inGameName2 : inGameName1}
+                </div>
             </div>
         </div>
     )
