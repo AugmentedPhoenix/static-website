@@ -64,6 +64,25 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                 <div className={`top-overlay`}>
                     {isInfoFlipped? inGameName2 : inGameName1}
                 </div>
+                <div className={`bottom-overlay`}>
+                    <ul className={`card-ul`}>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Erichthonios</p>
+                        </li>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Hippocampos</p>
+                        </li>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Phoinix</p>
+                        </li>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Hesperos</p>
+                        </li>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Hesperos II</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
