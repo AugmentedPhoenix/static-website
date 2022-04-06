@@ -78,6 +78,9 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                         <li className={`card-li`}>
                             <p className={`card-li-p`}>Hesperos</p>
                         </li>
+                        <li className={`card-li`}>
+                            <p className={`card-li-p`}>Hesperos II</p>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.e4850409.css",
-    "main.js": "/static/js/main.13b61879.js",
+    "main.js": "/static/js/main.3af9ae9f.js",
     "static/js/787.d65a6fad.chunk.js": "/static/js/787.d65a6fad.chunk.js",
     "static/media/avarum-slogan.png": "/static/media/avarum-slogan.76fe79505a19b2c12f61.png",
     "static/media/ExodusDemo-Sharpen.otf": "/static/media/ExodusDemo-Sharpen.a20a8e6113e69d4c6633.otf",
     "index.html": "/index.html",
     "main.e4850409.css.map": "/static/css/main.e4850409.css.map",
-    "main.13b61879.js.map": "/static/js/main.13b61879.js.map",
+    "main.3af9ae9f.js.map": "/static/js/main.3af9ae9f.js.map",
     "787.d65a6fad.chunk.js.map": "/static/js/787.d65a6fad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e4850409.css",
-    "static/js/main.13b61879.js"
+    "static/js/main.3af9ae9f.js"
   ]
 }
