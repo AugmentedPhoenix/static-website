@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {buildSchema, graphql} from "graphql";
 import {gql, GraphQLClient} from "graphql-request";
 
-const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlipped}) => {
+const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipped, isInfoFlipped}) => {
 
     /*TODO
     Players naar array in App.js en dan vanuit daar ophalen voor cards
@@ -41,62 +41,67 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
         }
     }
 
-    async function getPlayerData(playername, server, oneTwo){
-        const endpoint = "https://www.fflogs.com/api/v2/client"
-        const client = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWZmNGY0My03YzE4LTQwYjYtOTM0NS0yMzYxMzNmY2U5OTgiLCJqdGkiOiJiOTQxYjZlZTc5NDYzYWJmMmY0ZWUzMDdiNzU2ZDVlNzVmZTUyMDJmZjA1YzJkNzg2ZmI0MmYyNWFmMDM0OWUyMjBlNzRiOTc3ZTg1NDkxMyIsImlhdCI6MTY0OTI2MDg5Mi43OTk0MDcsIm5iZiI6MTY0OTI2MDg5Mi43OTk0MDksImV4cCI6MTY1OTYyODg5Mi43OTI1MSwic3ViIjoiIiwic2NvcGVzIjpbInZpZXctdXNlci1wcm9maWxlIiwidmlldy1wcml2YXRlLXJlcG9ydHMiXX0.KqhjXIqCGW1kVgMGJfXChjdU5XCQa--LxDatOFr_94Z8EzjtQOM_vX1btrztBbZ_o8YL6PAUflxgrlFyFP3wVahJNb0X_7a6sGcqhOT_ha3fkAx2i2wYnePIOGIvUqAUcgs2Qw5iAGvcBunMaa---ak2iGihR-gePaV3P5HWNaxATqeJbtBgVFTtH4NZewyxa10BKucr0f4tJYe2fqilnwAuWYOKzDQ8GqfNnGDfilLiIByK6NdzXpSdCjyYZixeWaOt8o3KAaRSCyNqfqym62zFo1NxEuAChSIqIDDWdanF7SCTTFrcXNXTsTz6gl3N8IliPTONoGdNA-cixWvJA71J_bbGwt3DOlNLz4iGHua3lLnLXloK2vcyXisy8o1UuLZOrjOJAfw0SbpFe20VcfFsUmdKpsovIvLTlbOItxH0DyUMRF3hANpWv2OzCdB9wNaVDxRwW0z97vfREg2b_u4SwcMEXKRvNGzVDmOzi6ol_bF0qkiavPBTXGUdVtha75gFQ61AXFlJcJF2OXpKq7474PYIVLcp2bHE3C8XG1-wzg7qv4MJof0cqqy2xwkTEiSu9JtwTN2G0mUFtelGKj3uMqtqB2Mr25QuE6mkqJHu-_krhytaJIsSBkZLWKBLCzn_Wz9Z7n8KiMTP5XZt9WMa8WlgRuJOinzfZLfhBr0',
-            },
-        })
-        const query = gql`
+    async function getPlayerData(playername, server, role, oneTwo){
+        if(playername != ''){
+            const endpoint = "https://www.fflogs.com/api/v2/client"
+            const client = new GraphQLClient(endpoint, {
+                headers: {
+                    authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWZmNGY0My03YzE4LTQwYjYtOTM0NS0yMzYxMzNmY2U5OTgiLCJqdGkiOiJiOTQxYjZlZTc5NDYzYWJmMmY0ZWUzMDdiNzU2ZDVlNzVmZTUyMDJmZjA1YzJkNzg2ZmI0MmYyNWFmMDM0OWUyMjBlNzRiOTc3ZTg1NDkxMyIsImlhdCI6MTY0OTI2MDg5Mi43OTk0MDcsIm5iZiI6MTY0OTI2MDg5Mi43OTk0MDksImV4cCI6MTY1OTYyODg5Mi43OTI1MSwic3ViIjoiIiwic2NvcGVzIjpbInZpZXctdXNlci1wcm9maWxlIiwidmlldy1wcml2YXRlLXJlcG9ydHMiXX0.KqhjXIqCGW1kVgMGJfXChjdU5XCQa--LxDatOFr_94Z8EzjtQOM_vX1btrztBbZ_o8YL6PAUflxgrlFyFP3wVahJNb0X_7a6sGcqhOT_ha3fkAx2i2wYnePIOGIvUqAUcgs2Qw5iAGvcBunMaa---ak2iGihR-gePaV3P5HWNaxATqeJbtBgVFTtH4NZewyxa10BKucr0f4tJYe2fqilnwAuWYOKzDQ8GqfNnGDfilLiIByK6NdzXpSdCjyYZixeWaOt8o3KAaRSCyNqfqym62zFo1NxEuAChSIqIDDWdanF7SCTTFrcXNXTsTz6gl3N8IliPTONoGdNA-cixWvJA71J_bbGwt3DOlNLz4iGHua3lLnLXloK2vcyXisy8o1UuLZOrjOJAfw0SbpFe20VcfFsUmdKpsovIvLTlbOItxH0DyUMRF3hANpWv2OzCdB9wNaVDxRwW0z97vfREg2b_u4SwcMEXKRvNGzVDmOzi6ol_bF0qkiavPBTXGUdVtha75gFQ61AXFlJcJF2OXpKq7474PYIVLcp2bHE3C8XG1-wzg7qv4MJof0cqqy2xwkTEiSu9JtwTN2G0mUFtelGKj3uMqtqB2Mr25QuE6mkqJHu-_krhytaJIsSBkZLWKBLCzn_Wz9Z7n8KiMTP5XZt9WMa8WlgRuJOinzfZLfhBr0',
+                },
+            })
+            const query = gql`
          {
                 characterData{
                     character(name: "${playername}", serverSlug: "${server}", serverRegion: "EU") {
                         name,
-                        zoneRankings(metric: rdps, timeframe: Historical)
+                        zoneRankings(metric: rdps, specName: "${role}", timeframe: Historical)
                     }
                 }
             }
         `
 
-        const data = await client.request(query);
-        const zoneRankings = data.characterData.character.zoneRankings;
-        if(oneTwo) {
-            setPlayer1Rankings([
-                zoneRankings.rankings[0].rankPercent.toFixed(1),
-                zoneRankings.rankings[1].rankPercent.toFixed(1),
-                zoneRankings.rankings[2].rankPercent.toFixed(1),
-                zoneRankings.rankings[3].rankPercent.toFixed(1),
-                zoneRankings.rankings[4].rankPercent.toFixed(1)
-            ])
-            setPlayer1Colors([
-                getParseColor(zoneRankings.rankings[0].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[1].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[2].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[3].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[4].rankPercent.toFixed(1))
-            ])
-        } else {
-            setPlayer2Rankings([
-                zoneRankings.rankings[0].rankPercent.toFixed(1),
-                zoneRankings.rankings[1].rankPercent.toFixed(1),
-                zoneRankings.rankings[2].rankPercent.toFixed(1),
-                zoneRankings.rankings[3].rankPercent.toFixed(1),
-                zoneRankings.rankings[4].rankPercent.toFixed(1)
-            ])
-            setPlayer2Colors([
-                getParseColor(zoneRankings.rankings[0].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[1].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[2].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[3].rankPercent.toFixed(1)),
-                getParseColor(zoneRankings.rankings[4].rankPercent.toFixed(1))
-            ])
+            console.log(query)
+
+            const data = await client.request(query);
+            console.log(data)
+            const zoneRankings = data.characterData.character.zoneRankings;
+            if(oneTwo) {
+                setPlayer1Rankings([
+                    zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1),
+                    zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1),
+                    zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1),
+                    zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1),
+                    zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1)
+                ])
+                setPlayer1Colors([
+                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1))
+                ])
+            } else {
+                setPlayer2Rankings([
+                    zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1),
+                    zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1),
+                    zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1),
+                    zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1),
+                    zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1)
+                ])
+                setPlayer2Colors([
+                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1)),
+                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1))
+                ])
+            }
         }
     }
 
     useEffect(() => {
         let link;
-        if(inGameName1 !== ''){
+        if(inGameName1 != ''){
             link = "https://xivapi.com/character/search?name=" + inGameName1.replace(' ', '+')
                 + "&server=" + server1 + "&private_key=3675586e68a34b60a0ef60c02dee23a0c9621fbb8e9c49eba160781b5972d78c";
 
@@ -114,10 +119,10 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                     setImgLink1(_link)
                 });
         } else {
-            link = "Test Card"
+            setImgLink1("https://img2.finalfantasyxiv.com/f/kekkekkeklmaololkek%20_640x873.jpg")
         }
 
-        getPlayerData(inGameName1, server1, true);
+        getPlayerData(inGameName1, server1, role1, true);
 
         if(inGameName2 !== ''){
             link = "https://xivapi.com/character/search?name=" + inGameName2.replace(' ', '+')
@@ -132,15 +137,16 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                     let portraitLink = Object.values(results[0])[0];
                     console.log(portraitLink)
                     let _link = portraitLink.replace('c0_96x96.jpg', 'l0_640x873.jpg');
+                    console.log(_link)
                     console.log(_link.split("?")[0])
 
                     setImgLink2(_link)
                 });
         } else {
-            link = "Test Card"
+            setImgLink2("https://img2.finalfantasyxiv.com/f/kekkekkeklmaololkek%20_640x873.jpg")
         }
 
-        getPlayerData(inGameName2, server2, false);
+        getPlayerData(inGameName2, server2, role2, false);
 
         console.log(getParseColor(player1Rankings[2]))
 
