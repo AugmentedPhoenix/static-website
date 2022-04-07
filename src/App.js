@@ -37,7 +37,7 @@ function App() {
                 <Navbar isVisible={showContent}/>
                 <div className={`content ${showContent ? "" : "hidden"}`}>
                     <Card inGameName1={'Desh Jomah'} server1={'Shiva'} inGameName2={"Zour O'dimm"} server2={'Phoenix'} isFlipped={cardsFlipped} isInfoFlipped={cardInfoFlipped}/>
-                    <Card inGameName1={'Kippy Luxuria'} server1={'Phoenix'} inGameName2={'Gio Redis'} server2={'Zodiark'} isFlipped={cardsFlipped} isInfoFlipped={cardInfoFlipped}/>
+                    <Card inGameName1={''} server1={''} inGameName2={'Gio Redis'} server2={'Zodiark'} isFlipped={cardsFlipped} isInfoFlipped={cardInfoFlipped}/>
                     <Card inGameName1={'Mr Mindless'} server1={'Lich'} inGameName2={"Prae's Slave"} server2={'Lich'} isFlipped={cardsFlipped} isInfoFlipped={cardInfoFlipped}/>
                     <Card inGameName1={'Skyler Crown'} server1={'Twintania'} inGameName2={'Leia Fae'} server2={'Phoenix'} isFlipped={cardsFlipped} isInfoFlipped={cardInfoFlipped}/>
                 </div>
