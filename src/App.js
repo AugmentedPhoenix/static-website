@@ -23,7 +23,9 @@ function App() {
         }, 3000)
     })
 
-    console.log("This is a test log!")
+    var token;
+    useEffect(() => {
+    },[])
 
     return (
         <div className="App">
@@ -43,7 +45,7 @@ function App() {
                      onClick={() => {
                          setCardsFlipped(!cardsFlipped)
                          setTimeout( function (){setCardInfoFlipped(!cardInfoFlipped)
-                         console.log("I am late")}, 1300)
+                         console.log("I am late")}, 1100)
                      }}
                 >
                     <NextButton>
