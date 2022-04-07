@@ -54,3 +54,18 @@
     font-size: 4vmin;
     font-family: 'Maven Pro', sans-serif;
 }
+
+@media (max-width: 500px) {
+    .navbar-text {
+        font-size: 4vmin;
+
+    }
+}
+
+@media (min-width: 500px) and (max-width: 1650px) {
+    
+}
+
+@media (min-width: 1650px) {
+
+}

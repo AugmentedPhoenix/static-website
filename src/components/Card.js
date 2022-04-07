@@ -6,30 +6,38 @@ import {gql, GraphQLClient} from "graphql-request";
 
 const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlipped}) => {
 
+    /*TODO
+    Players naar array in App.js en dan vanuit daar ophalen voor cards
+    css blurr in vivaldi?
+
+    schijd animatie/data van de frontend component
+
+    */
     const [imgLink1, setImgLink1] = useState(null)
     const [player1Rankings, setPlayer1Rankings] = useState(["0", "0", "0", "0", "0"])
-    const [player1Colors, setPlayer1Colors] = useState([[0,0,0,], [0,0,0], [0,0,0], [0,0,0], [0,0,0]])
+    const [player1Colors, setPlayer1Colors] = useState(['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'])
     const [imgLink2, setImgLink2] = useState(null)
     const [player2Rankings, setPlayer2Rankings] = useState(["0", "0", "0", "0", "0"])
-    const [player2Colors, setPlayer2Colors] = useState([[0,0,0,], [0,0,0], [0,0,0], [0,0,0], [0,0,0]])
+    const [player2Colors, setPlayer2Colors] = useState(['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'])
     const [hovered, setHovered] = useState(false)
     //const [isLoading, setIsLoading] = useState(true)
 
     const getParseColor = (parse) => {
+        parse = parseFloat(parse);
         if(parse < 25){
-            return [102, 102, 102] //gray
-        } else if (parse > 25 && parse < 49.9 ) {
-            return [30, 255, 0]
-        } else if (parse > 50 && parse < 74.9) {
-            return [0, 112, 255]
-        } else if (parse > 75 && parse < 94.9) {
-            return [163, 53, 238]
-        } else if (parse > 95 && parse < 98.9) {
-            return [255, 128, 0]
-        } else if (parse > 99 && parse < 100) {
-            return [226, 104, 168]
+            return '#666666' //gray
+        } else if (parse >= 25 && parse <= 50 ) {
+            return '#1eff00'
+        } else if (parse >= 50 && parse <= 75) {
+            return '#0070ff'
+        } else if (parse >= 75 && parse <= 95) {
+            return '#a335ee'
+        } else if (parse >= 95 && parse <= 98.9) {
+            return '#ff8000'
+        } else if (parse >= 99 && parse <= 99.9) {
+            return '#e268a8'
         } else {
-            return [229, 204, 128]
+            return '#e5cc80'
         }
     }
 
@@ -62,11 +70,11 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                 zoneRankings.rankings[4].rankPercent.toFixed(1)
             ])
             setPlayer1Colors([
-                getParseColor(player1Rankings[0]),
-                getParseColor(player1Rankings[1]),
-                getParseColor(player1Rankings[2]),
-                getParseColor(player1Rankings[3]),
-                getParseColor(player1Rankings[4])
+                getParseColor(zoneRankings.rankings[0].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[1].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[2].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[3].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[4].rankPercent.toFixed(1))
             ])
         } else {
             setPlayer2Rankings([
@@ -77,22 +85,22 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                 zoneRankings.rankings[4].rankPercent.toFixed(1)
             ])
             setPlayer2Colors([
-                getParseColor(player2Rankings[0]),
-                getParseColor(player2Rankings[1]),
-                getParseColor(player2Rankings[2]),
-                getParseColor(player2Rankings[3]),
-                getParseColor(player2Rankings[4])
+                getParseColor(zoneRankings.rankings[0].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[1].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[2].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[3].rankPercent.toFixed(1)),
+                getParseColor(zoneRankings.rankings[4].rankPercent.toFixed(1))
             ])
         }
     }
 
-    var link;
     useEffect(() => {
+        let link;
         if(inGameName1 !== ''){
             link = "https://xivapi.com/character/search?name=" + inGameName1.replace(' ', '+')
                 + "&server=" + server1 + "&private_key=3675586e68a34b60a0ef60c02dee23a0c9621fbb8e9c49eba160781b5972d78c";
 
-            //write some logic that firt checks if the img is already downloaded and ifso uses that img
+            //write some logic that first checks if the img is already downloaded and ifso uses that img
 
             axios(link)
                 .then(async response => {
@@ -153,23 +161,23 @@ const Card = ({inGameName1, server1, inGameName2, server2, isFlipped, isInfoFlip
                     <ul className={`card-ul`}>
                         <li className={`card-li`}>
                             <p className={`card-li-p-front`}>Erichthonios</p>
-                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[0] : player1Colors[0]}`}}>{player1Rankings[0]}</p>
+                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[0] : player1Colors[0]}`}}>{isInfoFlipped? player2Rankings[0] : player1Rankings[0]}</p>
                         </li>
                         <li className={`card-li`}>
                             <p className={`card-li-p-front`}>Hippocampos</p>
-                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[1] : player1Colors[1]}`}}>{player1Rankings[1]}</p>
+                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[1] : player1Colors[1]}`}}>{isInfoFlipped? player2Rankings[1] : player1Rankings[1]}</p>
                         </li>
                         <li className={`card-li`}>
                             <p className={`card-li-p-front`}>Phoinix</p>
-                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[2] : player1Colors[2]}`}}>{player1Rankings[2]}</p>
+                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[2] : player1Colors[2]}`}}>{isInfoFlipped? player2Rankings[2] : player1Rankings[2]}</p>
                         </li>
                         <li className={`card-li`}>
                             <p className={`card-li-p-front`}>Hesperos</p>
-                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[3] : player1Colors[3]}`}}>{player1Rankings[3]}</p>
+                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[3] : player1Colors[3]}`}}>{isInfoFlipped? player2Rankings[3] : player1Rankings[3]}</p>
                         </li>
                         <li className={`card-li`}>
                             <p className={`card-li-p-front`}>Hesperos II</p>
-                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[4] : player1Colors[4]}`}}>{player1Rankings[4]}</p>
+                            <p className={`card-li-p-parse`} style={{color: `${isInfoFlipped? player2Colors[4] : player1Colors[4]}`}}>{isInfoFlipped? player2Rankings[4] : player1Rankings[4]}</p>
                         </li>
                     </ul>
                 </div>

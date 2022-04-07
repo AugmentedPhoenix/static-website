@@ -89,9 +89,10 @@
     text-align: left;
     padding-bottom: .5vmin;
     border-bottom: 1px solid rgb(206, 206, 206);
-    display: inline-block;
-
+    display: flex;
+    justify-content: space-between;
 }
+
 .card-li-p-front {
     font-size: 2vmin;
     margin-top: 0;
@@ -105,7 +106,6 @@
     margin-top: 0;
     margin-bottom: 0;
     display: inline-block;
-    float: right;
     padding-right: 1vmin;
 }
 /*
