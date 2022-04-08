@@ -12,6 +12,12 @@ const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipp
 
     schijd animatie/data van de frontend component
 
+    add header
+    add icon change
+
+    add 1366 width support cause it looks like shit
+
+    fix toFixed, it is rounding up which it should not do! Prae's parse on p1 is invalid.
     */
     const [imgLink1, setImgLink1] = useState(null)
     const [player1Rankings, setPlayer1Rankings] = useState(["0", "0", "0", "0", "0"])
@@ -41,6 +47,11 @@ const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipp
         }
     }
 
+    const floatTruncate = (float) => {
+        float = Math.trunc(float * 10) / 10;
+        return float;
+    }
+
     async function getPlayerData(playername, server, role, oneTwo){
         if(playername != ''){
             const endpoint = "https://www.fflogs.com/api/v2/client"
@@ -67,33 +78,33 @@ const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipp
             const zoneRankings = data.characterData.character.zoneRankings;
             if(oneTwo) {
                 setPlayer1Rankings([
-                    zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1),
-                    zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1),
-                    zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1),
-                    zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1),
-                    zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1)
+                    zoneRankings.rankings[0].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[0].rankPercent),
+                    zoneRankings.rankings[1].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[1].rankPercent),
+                    zoneRankings.rankings[2].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[2].rankPercent),
+                    zoneRankings.rankings[3].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[3].rankPercent),
+                    zoneRankings.rankings[4].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[4].rankPercent)
                 ])
                 setPlayer1Colors([
-                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1))
+                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[0].rankPercent)),
+                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[1].rankPercent)),
+                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[2].rankPercent)),
+                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[3].rankPercent)),
+                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[4].rankPercent))
                 ])
             } else {
                 setPlayer2Rankings([
-                    zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1),
-                    zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1),
-                    zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1),
-                    zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1),
-                    zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1)
+                    zoneRankings.rankings[0].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[0].rankPercent),
+                    zoneRankings.rankings[1].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[1].rankPercent),
+                    zoneRankings.rankings[2].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[2].rankPercent),
+                    zoneRankings.rankings[3].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[3].rankPercent),
+                    zoneRankings.rankings[4].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[4].rankPercent)
                 ])
                 setPlayer2Colors([
-                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : zoneRankings.rankings[0].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : zoneRankings.rankings[1].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : zoneRankings.rankings[2].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : zoneRankings.rankings[3].rankPercent.toFixed(1)),
-                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : zoneRankings.rankings[4].rankPercent.toFixed(1))
+                    getParseColor(zoneRankings.rankings[0].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[0].rankPercent)),
+                    getParseColor(zoneRankings.rankings[1].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[1].rankPercent)),
+                    getParseColor(zoneRankings.rankings[2].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[2].rankPercent)),
+                    getParseColor(zoneRankings.rankings[3].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[3].rankPercent)),
+                    getParseColor(zoneRankings.rankings[4].rankPercent == null? 0 : floatTruncate(zoneRankings.rankings[4].rankPercent))
                 ])
             }
         }
