@@ -1,8 +1,11 @@
-export default [
+export const player = (name, server, region, job, isTrial) => [
     {
-        "name": "Mr Mindless",
-        "server": "Lich",
-        "region": "EU",
-        "isTrial": false
+        "name": name,
+        "server": server,
+        "region": region,
+        "job": job,
+        "isTrial": isTrial
     }
 ]
+
+export default player;
