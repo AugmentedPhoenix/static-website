@@ -3,8 +3,9 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {buildSchema, graphql} from "graphql";
 import {gql, GraphQLClient} from "graphql-request";
+import TrialTag from "./TrialTag";
 
-const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipped, isInfoFlipped}) => {
+const Card = ({inGameName1, server1, role1, player1IsTrial, inGameName2, server2, role2, player2IsTrial, isFlipped, isInfoFlipped}) => {
 
     /*TODO
     Players naar array in App.js en dan vanuit daar ophalen voor cards
@@ -111,6 +112,11 @@ const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipp
     }
 
     useEffect(() => {
+
+        console.log(inGameName1 + ": " + player1IsTrial)
+        console.log(inGameName2 + ": " + player2IsTrial)
+
+
         let link;
         if(inGameName1 != ''){
             link = "https://xivapi.com/character/search?name=" + inGameName1.replace(' ', '+')
@@ -174,6 +180,7 @@ const Card = ({inGameName1, server1, role1, inGameName2, server2, role2, isFlipp
                 <div className={`top-overlay`}>
                     {isInfoFlipped? inGameName2 : inGameName1}
                 </div>
+                <TrialTag isTrial={isInfoFlipped? player2IsTrial : player1IsTrial}/>
                 <div className={`bottom-overlay`}>
                     <ul className={`card-ul`}>
                         <li className={`card-li`}>
