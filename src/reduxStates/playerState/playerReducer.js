@@ -1,4 +1,5 @@
 import { ADD_PLAYER } from "../types";
+import { hash } from "../../utility/hashFunctions"
 
 const initialState = {};
 
@@ -15,3 +16,6 @@ const playerReducer = (state = initialState, action) => {
 };
 
 export default playerReducer;
+
+//hash(action.payload.name + "+" + action.payload.server)
+// /action.payload.name + " " + action.payload.server
